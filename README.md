@@ -9,7 +9,7 @@ Tais análises não estão acessíveis facilmente, fazendo com que muitos pesqui
 
 ## Como usar
 
-Primeiramente, é preciso instalar o Python no computador que vai fazer essa conversão. Os programas foram escritos em Python 3. Ver as instruções de instalação para o sistema operacional utilizado no seu computador utilizando seu sistema de busca favorito.
+Primeiramente, é preciso instalar o Python no computador que vai fazer essa conversão. Os programas foram escritos em Python 3. Ver as instruções de instalação para o sistema operacional utilizado no seu computador valendo-se de seu sistema de busca favorito.
 
 Os scripts foram propositalmente escritos apenas com as bibliotecas básicas do Python, não requerendo a instalação de bibliotecas adicionais.
 
