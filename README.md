@@ -33,3 +33,20 @@ cat *.csv ../producao.csv
 for f in *.zip; do unzip -o $f; lattesprdt.py; done
 cat *.csv ../tecnica.csv
 ```
+
+## Update 2020-12-08
+
+## Novos módulos: eventos e dados do egresso
+Os módulos se chamam, respectivamente, **lattesevt.py** e **lattesalumn.py**
+
+## Agora cada módulo gera um CSV com um sufixo no nome
+
+Com nomes diferentes para cada CSV, posso rodar todos os scripts simultaneamente:
+```
+cd XML
+for f in *.zip; do unzip -o $f; lattesprd.py; lattesprdt.py; lattesevt.py; done
+rm curriculo.xml
+cat *prd.csv ../producao.csv
+cat *prdt.csv ../tecnica.csv
+cat *evt.csv ../eventos.csv
+```
