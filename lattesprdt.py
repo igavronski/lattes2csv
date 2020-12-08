@@ -22,6 +22,7 @@ for attrib in root:
             if paper.tag != 'TRABALHO-TECNICO':
                 continue
             seq = paper.get('SEQUENCIA-PRODUCAO')
+            id_seq = id_lattes + seq
             autores = []
             resumo = ''
             for detail in paper:
@@ -50,7 +51,7 @@ for attrib in root:
 
             autores = sorted(autores)
             autores = "; ".join("%s" % autor for (ordem, autor) in autores) 
-            line = [id_lattes, nome, seq, autores, ano, titulo, doi,
+            line = [id_lattes, seq, id_seq, nome, autores, ano, titulo, doi,
                     url, pais, cidade, finalidade, duracao, financ,
                     resumo]
             i = 0
@@ -62,8 +63,9 @@ for attrib in root:
             line = '","'.join(line)
             line = '"' + line + '"\n'
             output += line
-outfile = open(id_lattes+'.csv', 'w')
-outfile.write(output)
-outfile.close()
-print('File {}.csv ({}) written'.format(id_lattes,nome))
+fn = id_lattes+'prdt.csv'
+file = open(fn, 'w')
+file.write(output)
+file.close()
+print('File {} ({}) written'.format(fn,nome))
 

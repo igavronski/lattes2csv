@@ -14,7 +14,7 @@ output = ''
 for attrib in root:
     if attrib.tag == 'DADOS-GERAIS':
         nome = attrib.get('NOME-COMPLETO')
-    papers = attrib.find('ARTIGOS-PUBLICADOS')
+    papers = attrib.find('TRABALHOS-EM-EVENTOS')
     if papers == None:
         continue
     #print(papers)
@@ -27,19 +27,18 @@ for attrib in root:
         for detail in paper:
             #print(detail.tag)
             tag = detail.tag
-            if tag == 'DADOS-BASICOS-DO-ARTIGO':
-                titulo = detail.get('TITULO-DO-ARTIGO')
-                ano = detail.get('ANO-DO-ARTIGO')
+            if tag == 'DADOS-BASICOS-DO-TRABALHO':
+                natureza = detail.get('NATUREZA')
+                titulo = detail.get('TITULO-DO-TRABALHO')
+                ano = detail.get('ANO-DO-TRABALHO')
                 url = detail.get('HOME-PAGE-DO-TRABALHO')
                 url = url.strip('[]')
                 doi = detail.get('DOI')
-            if tag == 'DETALHAMENTO-DO-ARTIGO':
-                periodico = detail.get('TITULO-DO-PERIODICO-OU-REVISTA')
-                issn = detail.get('ISSN')
-                vol = detail.get('VOLUME')
-                issue = detail.get('SERIE')
-                pgini = detail.get('PAGINA-INICIAL')
-                pgfim = detail.get('PAGINA-FINAL')
+                pais = detail.get('PAIS-DO-EVENTO')
+            if tag == 'DETALHAMENTO-DO-TRABALHO':
+                classe = detail.get('CLASSIFICACAO-DO-EVENTO')
+                evento = detail.get('NOME-DO-EVENTO')
+                cidade = detail.get('CIDADE-DA-EDITORA')
             if tag == 'AUTORES':
                 autor = detail.get('NOME-PARA-CITACAO')
                 autor = autor.split(';')
@@ -51,13 +50,15 @@ for attrib in root:
         autores = sorted(autores)
         autores = "; ".join("%s" % autor for (ordem, autor) in autores) 
         #print('"{}","{}",{},"{}","{}"'.join(id_lattes, titulo, ano, periodico, issn))
-        line = [id_lattes, seq, id_seq, nome, autores, ano, titulo, periodico, issn, doi,
-                url, vol, issue, pgini, pgfim]
+        line = [id_lattes, seq, id_seq, nome, autores, ano, titulo, 
+                evento, natureza,
+                cidade, pais, classe,
+                url, doi]
         #line = '", "'.join(line) never use spaces after delimiting commas!
         line = '","'.join(line)
         line = '"' + line + '"\n'
         output += line
-fn = id_lattes+'prd.csv'
+fn = id_lattes+'evt.csv'
 file = open(fn, 'w')
 file.write(output)
 file.close()
